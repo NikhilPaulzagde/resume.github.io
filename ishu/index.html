@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I'm Sorry, Ishu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(135deg, #0a1220 0%, #1a2744 30%, #0f1a2e 70%, #1a2744 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 12s ease infinite;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .stars-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .stars-float, .petals-float {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .star {
+      position: absolute;
+      font-size: 1.2rem;
+      opacity: 0.25;
+      animation: floatUp 9s ease-in-out infinite;
+    }
+    .stars-float .star:nth-child(1) { left: 4%; animation-delay: 0s; animation-duration: 7s; }
+    .stars-float .star:nth-child(2) { left: 10%; animation-delay: 1s; animation-duration: 8s; }
+    .stars-float .star:nth-child(3) { left: 16%; animation-delay: 2s; animation-duration: 6s; }
+    .stars-float .star:nth-child(4) { left: 22%; animation-delay: 0.5s; animation-duration: 9s; }
+    .stars-float .star:nth-child(5) { left: 28%; animation-delay: 1.5s; animation-duration: 7s; }
+    .stars-float .star:nth-child(6) { left: 34%; animation-delay: 2.5s; animation-duration: 8s; }
+    .stars-float .star:nth-child(7) { left: 40%; animation-delay: 0.8s; animation-duration: 6.5s; }
+    .stars-float .star:nth-child(8) { left: 46%; animation-delay: 1.8s; animation-duration: 7.5s; }
+    .stars-float .star:nth-child(9) { left: 52%; animation-delay: 2.2s; animation-duration: 8.5s; }
+    .stars-float .star:nth-child(10) { left: 58%; animation-delay: 0.3s; animation-duration: 7.2s; }
+    .stars-float .star:nth-child(11) { left: 64%; animation-delay: 1.2s; animation-duration: 8.2s; }
+    .stars-float .star:nth-child(12) { left: 70%; animation-delay: 2.1s; animation-duration: 6.8s; }
+    .stars-float .star:nth-child(13) { left: 76%; animation-delay: 0.6s; animation-duration: 9.2s; }
+    .stars-float .star:nth-child(14) { left: 82%; animation-delay: 1.4s; animation-duration: 7.8s; }
+    .stars-float .star:nth-child(15) { left: 88%; animation-delay: 2.4s; animation-duration: 6.4s; }
+    .stars-float .star:nth-child(16) { left: 94%; animation-delay: 0.9s; animation-duration: 8.8s; }
+    .stars-float .star:nth-child(17) { left: 7%; animation-delay: 1.7s; animation-duration: 7.4s; }
+    .stars-float .star:nth-child(18) { left: 37%; animation-delay: 2.6s; animation-duration: 6.6s; }
+    .stars-float .star:nth-child(19) { left: 67%; animation-delay: 0.4s; animation-duration: 9s; }
+    .stars-float .star:nth-child(20) { left: 91%; animation-delay: 1.9s; animation-duration: 7.1s; }
+    @keyframes floatUp {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.15; }
+      100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+    }
+    .petal {
+      position: absolute;
+      font-size: 1.3rem;
+      opacity: 0.4;
+      animation: petalFloat 12s ease-in-out infinite;
+    }
+    .petals-float .petal:nth-child(1) { left: 8%; top: 15%; animation-delay: 0s; }
+    .petals-float .petal:nth-child(2) { left: 20%; top: 50%; animation-delay: 1.5s; }
+    .petals-float .petal:nth-child(3) { left: 35%; top: 25%; animation-delay: 0.8s; }
+    .petals-float .petal:nth-child(4) { left: 55%; top: 70%; animation-delay: 2s; }
+    .petals-float .petal:nth-child(5) { left: 70%; top: 18%; animation-delay: 1.2s; }
+    .petals-float .petal:nth-child(6) { left: 82%; top: 55%; animation-delay: 0.4s; }
+    .petals-float .petal:nth-child(7) { left: 45%; top: 40%; animation-delay: 2.4s; }
+    .petals-float .petal:nth-child(8) { left: 90%; top: 35%; animation-delay: 1.8s; }
+    .petals-float .petal:nth-child(9) { left: 12%; top: 75%; animation-delay: 0.6s; }
+    .petals-float .petal:nth-child(10) { left: 62%; top: 8%; animation-delay: 2.8s; }
+    @keyframes petalFloat {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+      25% { transform: translate(12px, -18px) rotate(15deg); opacity: 0.45; }
+      50% { transform: translate(-10px, 12px) rotate(-10deg); opacity: 0.35; }
+      75% { transform: translate(18px, 8px) rotate(8deg); opacity: 0.45; }
+    }
+    .top-right-emoji {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 10;
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      line-height: 1;
+      animation: softFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    }
+    @keyframes softFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .question-screen {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      animation: fadeInUp 1s ease-out;
+      max-width: 520px;
+    }
+    .question-screen.hidden { display: none; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .question-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.75rem;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+    .question-intro {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.3rem, 4vw, 1.7rem);
+      color: #a8c5e8;
+      margin-bottom: 0.75rem;
+    }
+    .question-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.9rem, 5vw, 2.9rem);
+      font-weight: 700;
+      color: #c5d9f2;
+      margin-bottom: 0.5rem;
+    }
+    .question-sub {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0.5rem;
+      font-style: italic;
+    }
+    .question-deco {
+      font-size: 1.3rem;
+      letter-spacing: 0.4rem;
+      opacity: 0.7;
+      margin-bottom: 2rem;
+    }
+    .buttons-wrap {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      min-height: 56px;
+    }
+    .btn {
+      padding: 0.75rem 2rem;
+      font-size: 1.15rem;
+      font-family: 'Quicksand', sans-serif;
+      font-weight: 600;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-yes {
+      background: linear-gradient(135deg, #4a90d9, #7eb8f0);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(74, 144, 217, 0.45);
+    }
+    .btn-yes:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 28px rgba(74, 144, 217, 0.55);
+    }
+    .btn-no {
+      position: relative;
+      background: linear-gradient(135deg, #555, #333);
+      color: #ccc;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      transition: left 0.15s ease-out, top 0.15s ease-out;
+    }
+    .btn-no.running { position: fixed; }
+    .btn-no:hover { cursor: default; }
+    .message-screen {
+      position: relative;
+      z-index: 1;
+      max-width: 540px;
+      width: 100%;
+      text-align: center;
+      display: none;
+    }
+    .message-screen.visible {
+      display: block;
+      animation: fadeInUp 1.2s ease-out;
+    }
+    .heart-icon {
+      font-size: 3.5rem;
+      margin-bottom: 0.5rem;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    .message-screen h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      font-weight: 700;
+      background: linear-gradient(90deg, #a8c5e8, #d4e4f7, #7eb8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.75rem;
+    }
+    .to-name {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      color: #a8c5e8;
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+    }
+    .message {
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: rgba(255, 255, 255, 0.94);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .message p { margin-bottom: 1rem; }
+    .message p:last-child { margin-bottom: 0; }
+    .signature {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.6rem;
+      color: #a8c5e8;
+      margin-top: 1.25rem;
+    }
+    .apology-close {
+      margin-top: 2rem;
+      padding: 1.25rem 1rem;
+    }
+    .apology-close-line {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #a8c5e8 0%, #d4e4f7 40%, #7eb8f0 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 18px rgba(126, 184, 240, 0.35));
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+    .apology-close-deco {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-top: 0.75rem;
+      font-size: 1.3rem;
+    }
+    .apology-close-deco span {
+      animation: softPulse 2s ease-in-out infinite;
+    }
+    .apology-close-deco span:nth-child(2) { animation-delay: 0.2s; }
+    .apology-close-deco span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes softPulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    .cursor-hearts, .click-explosion, .hearts-celebration {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      overflow: hidden;
+    }
+    .cursor-heart {
+      position: fixed;
+      font-size: 1.1rem;
+      pointer-events: none;
+      animation: cursorHeart 1.2s ease-out forwards;
+    }
+    @keyframes cursorHeart {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.6); }
+      70% { opacity: 0.9; transform: translate(-50%, -60%) scale(1); }
+      100% { opacity: 0; transform: translate(-50%, -100%) scale(0.8); }
+    }
+    .click-explosion span, .hearts-celebration span {
+      position: fixed;
+      font-size: 1.35rem;
+      animation: burstOut 1.5s ease-out forwards;
+      opacity: 0;
+    }
+    @keyframes burstOut {
+      0% { opacity: 1; transform: translate(0, 0) scale(0.3); }
+      100% { opacity: 0; transform: translate(var(--ex-tx), var(--ex-ty)) scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars-bg" aria-hidden="true">
+    <div class="stars-float">
+      <span class="star">✨</span><span class="star">⭐</span><span class="star">✨</span>
+      <span class="star">💫</span><span class="star">⭐</span><span class="star">✨</span>
+      <span class="star">💫</span><span class="star">⭐</span><span class="star">✨</span>
+      <span class="star">💫</span><span class="star">⭐</span><span class="star">✨</span>
+      <span class="star">💫</span><span class="star">⭐</span><span class="star">✨</span>
+      <span class="star">💫</span><span class="star">⭐</span><span class="star">✨</span>
+      <span class="star">💫</span><span class="star">⭐</span>
+    </div>
+    <div class="petals-float">
+      <span class="petal">🌸</span><span class="petal">💮</span><span class="petal">🌸</span>
+      <span class="petal">💮</span><span class="petal">🌸</span><span class="petal">💮</span>
+      <span class="petal">🌸</span><span class="petal">💮</span><span class="petal">🌸</span>
+      <span class="petal">💮</span>
+    </div>
+  </div>
+
+  <div class="top-right-emoji" aria-hidden="true">🕊️</div>
+
+  <section class="question-screen" id="questionScreen">
+    <div class="question-icon">🙏</div>
+    <p class="question-intro">Ishu, main jaanta hoon maine tumhe dukh diya… aur mujhe sach mein bohot sorry hai.</p>
+    <p class="question-text">Kya tum mujhe maaf karogi?</p>
+    <p class="question-sub">(Please yes bol do—main tumhe kabhi khoona nahi chahta.)</p>
+    <p class="question-deco" aria-hidden="true">✨ 🌸 ✨</p>
+    <div class="buttons-wrap">
+      <button type="button" class="btn btn-yes" id="btnYes">Haan, maaf karti hoon</button>
+      <button type="button" class="btn btn-no" id="btnNo">Nahi</button>
+    </div>
+  </section>
+
+  <section class="message-screen" id="messageScreen">
+    <div class="heart-icon">💙</div>
+    <h1>Maafi ke liye thank you</h1>
+    <p class="to-name">Ishu</p>
+    <div class="message">
+      <p>Ishu, main truly sorry hoon. Maine tumhe dukh diya, aur ye galat tha. Tum meri bestie ho — please maaf kar dena. Main better banunga, promise.</p>
+    </div>
+    <p class="signature">Dil se, Your Doma</p>
+    <div class="apology-close">
+      <p class="apology-close-line">Maaf kar dena, Ishu</p>
+      <div class="apology-close-deco" aria-hidden="true">
+        <span>🕊️</span><span>💙</span><span>🕊️</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="hearts-celebration" id="heartsCelebration" aria-hidden="true"></div>
+  <div class="cursor-hearts" id="cursorHearts" aria-hidden="true"></div>
+  <div class="click-explosion" id="clickExplosion" aria-hidden="true"></div>
+
+  <script>
+    (function () {
+      var questionScreen = document.getElementById('questionScreen');
+      var messageScreen = document.getElementById('messageScreen');
+      var btnYes = document.getElementById('btnYes');
+      var btnNo = document.getElementById('btnNo');
+      var celebrationEl = document.getElementById('heartsCelebration');
+      var cursorHeartsEl = document.getElementById('cursorHearts');
+      var clickExplosionEl = document.getElementById('clickExplosion');
+
+      var softEmojis = ['💙', '✨', '🌸', '🕊️', '💫'];
+      var lastHeartTime = 0;
+      var heartThrottle = 80;
+      var runAwayRadius = 140;
+      var noButtonReleased = false;
+
+      function addCursorHeart(x, y) {
+        var span = document.createElement('span');
+        span.className = 'cursor-heart';
+        span.textContent = softEmojis[Math.floor(Math.random() * softEmojis.length)];
+        span.style.left = x + 'px';
+        span.style.top = y + 'px';
+        cursorHeartsEl.appendChild(span);
+        setTimeout(function () {
+          if (span.parentNode) span.parentNode.removeChild(span);
+        }, 1200);
+      }
+
+      document.addEventListener('mousemove', function (e) {
+        var now = Date.now();
+        if (now - lastHeartTime < heartThrottle) return;
+        lastHeartTime = now;
+        addCursorHeart(e.clientX, e.clientY);
+      });
+
+      function setNoButtonPosition(x, y) {
+        var rect = btnNo.getBoundingClientRect();
+        var maxX = window.innerWidth - rect.width - 20;
+        var maxY = window.innerHeight - rect.height - 20;
+        var minX = 20;
+        var minY = 20;
+        btnNo.style.left = Math.max(minX, Math.min(maxX, x)) + 'px';
+        btnNo.style.top = Math.max(minY, Math.min(maxY, y)) + 'px';
+      }
+
+      function randomPosition() {
+        var rect = btnNo.getBoundingClientRect();
+        var padding = 40;
+        var x = padding + Math.random() * (window.innerWidth - rect.width - padding * 2);
+        var y = padding + Math.random() * (window.innerHeight - rect.height - padding * 2);
+        setNoButtonPosition(x, y);
+      }
+
+      document.addEventListener('mousemove', function (e) {
+        if (messageScreen.classList.contains('visible')) return;
+        var rect = btnNo.getBoundingClientRect();
+        var cx = rect.left + rect.width / 2;
+        var cy = rect.top + rect.height / 2;
+        var dx = e.clientX - cx;
+        var dy = e.clientY - cy;
+        var dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < runAwayRadius) {
+          if (!noButtonReleased) {
+            noButtonReleased = true;
+            btnNo.classList.add('running');
+            setNoButtonPosition(rect.left, rect.top);
+          }
+          var newX = rect.left + (Math.random() > 0.5 ? 1 : -1) * (120 + Math.random() * 150);
+          var newY = rect.top + (Math.random() > 0.5 ? 1 : -1) * (80 + Math.random() * 120);
+          setNoButtonPosition(newX, newY);
+        }
+      });
+
+      btnNo.addEventListener('click', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!noButtonReleased) {
+          noButtonReleased = true;
+          btnNo.classList.add('running');
+          var rect = btnNo.getBoundingClientRect();
+          setNoButtonPosition(rect.left, rect.top);
+        }
+        randomPosition();
+      });
+
+      function showCelebration() {
+        celebrationEl.innerHTML = '';
+        for (var i = 0; i < 28; i++) {
+          var span = document.createElement('span');
+          span.textContent = softEmojis[i % softEmojis.length];
+          span.style.left = '50%';
+          span.style.top = '50%';
+          var angle = (i / 28) * Math.PI * 2 + Math.random();
+          var dist = 80 + Math.random() * 120;
+          span.style.setProperty('--ex-tx', Math.cos(angle) * dist + 'px');
+          span.style.setProperty('--ex-ty', Math.sin(angle) * dist + 'px');
+          span.style.animationDelay = (i * 0.02) + 's';
+          celebrationEl.appendChild(span);
+        }
+        setTimeout(function () { celebrationEl.innerHTML = ''; }, 2500);
+      }
+
+      function showExplosionAt(x, y) {
+        clickExplosionEl.innerHTML = '';
+        var count = 40;
+        for (var i = 0; i < count; i++) {
+          var span = document.createElement('span');
+          span.textContent = softEmojis[i % softEmojis.length];
+          span.style.left = x + 'px';
+          span.style.top = y + 'px';
+          var angle = (i / count) * Math.PI * 2 + Math.random() * 0.5;
+          var dist = 60 + Math.random() * 140;
+          span.style.setProperty('--ex-tx', Math.cos(angle) * dist + 'px');
+          span.style.setProperty('--ex-ty', Math.sin(angle) * dist + 'px');
+          span.style.animationDelay = (i * 0.02) + 's';
+          clickExplosionEl.appendChild(span);
+        }
+        setTimeout(function () { clickExplosionEl.innerHTML = ''; }, 1600);
+      }
+
+      function goToMessageScreen() {
+        questionScreen.classList.add('hidden');
+        messageScreen.classList.add('visible');
+        showCelebration();
+      }
+
+      btnYes.addEventListener('click', function (e) {
+        e.stopPropagation();
+        showExplosionAt(e.clientX, e.clientY);
+        setTimeout(goToMessageScreen, 1200);
+      });
+
+      document.addEventListener('click', function (e) {
+        if (e.target === btnNo || e.target === btnYes) return;
+        showExplosionAt(e.clientX, e.clientY);
+      });
+    })();
+  </script>
+</body>
+</html>
